@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proclaim Christ is King</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<h1>Christ is King</h1>
+    <p>In one country in North Africa, 5 times every day, 50,000 mosques deny the deity of Christ—250,000 times daily! The only response is to Pray and Proclaim. Subscribe to the calendars below (iOS/Android) to get a reminder at each prayer time to Proclaim Christ is King.</p>
+    
+<body class="bg-gray-100 text-gray-900 flex flex-col items-center p-6">
+    <div class="max-w-2xl w-full bg-white p-6 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-center">Proclaim Christ is King</h1>
+        <p class="text-center mt-2">Automatically notifies at Muslim prayer times to proclaim Christ.</p>
+        
+        <div class="mt-6 text-center">
+            <h2 class="text-xl font-semibold">Today's Prayer Times</h2>
+            <ul id="prayer-times" class="mt-2 space-y-1 text-lg font-mono"></ul>
+        </div>
+
+        <div class="mt-6 text-center">
+            <h2 class="text-xl font-semibold">Next Notification In:</h2>
+            <p id="countdown" class="text-2xl font-bold text-red-600 mt-2"></p>
+        </div>
+        
+        <div class="mt-6 text-center">
+            <a href="#" id="google-calendar" class="text-blue-600 underline">Subscribe to Google Calendar</a>
+        </div>
+    </div>
+
+    <script>
+        async function fetchPrayerTimes() {
+            const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Casablanca&country=Morocco&method=2');
+            const data = await response.json();
+            const times = data.data.timings;
+            const prayerTimesList = document.getElementById('prayer-times');
+            
+            prayerTimesList.innerHTML = '';
+            for (const [name, time] of Object.entries(times)) {
+                if (['Sunrise', 'Sunset', 'Midnight'].includes(name)) continue;
+                let li = document.createElement('li');
+                li.textContent = `${name}: ${time}`;
+                prayerTimesList.appendChild(li);
+            }
+
+            startCountdown(times);
+        }
+
+        function startCountdown(times) {
+            function updateCountdown() {
+                const now = new Date();
+                let nextTime = null;
+                let nextName = '';
+
+                for (const [name, time] of Object.entries(times)) {
+                    if (['Sunrise', 'Sunset', 'Midnight'].includes(name)) continue;
+                    const [hours, minutes] = time.split(':').map(Number);
+                    const prayerTime = new Date();
+                    prayerTime.setHours(hours, minutes, 0, 0);
+
+                    if (prayerTime > now) {
+                        nextTime = prayerTime;
+                        nextName = name;
+                        break;
+                    }
+                }
+
+                if (nextTime) {
+                    const diff = nextTime - now;
+                    const hours = Math.floor(diff / 3600000);
+                    const minutes = Math.floor((diff % 3600000) / 60000);
+                    const seconds = Math.floor((diff % 60000) / 1000);
+                    document.getElementById('countdown').textContent = `${nextName} in ${hours}h ${minutes}m ${seconds}s`;
+                } else {
+                    document.getElementById('countdown').textContent = "No more prayers today.";
+                }
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        fetchPrayerTimes();
+    </script>
+    <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+    <script>
+      kofiWidgetOverlay.draw('paragoncollective', {
+        'type': 'floating-chat',
+        'floating-chat.donateButton.text': 'Support me',
+        'floating-chat.donateButton.background-color': '#323842',
+        'floating-chat.donateButton.text-color': '#fff'
+      });
+    </script>
+</body>
+</html>
