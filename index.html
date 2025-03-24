@@ -6,8 +6,11 @@
     <title>Proclaim Christ is King</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-cover bg-center bg-no-repeat text-black" style="background-image: url('https://paragonprints.github.io/prayertimes/bg.jpg');">   
-    <div class="relative min-h-screen flex justify-center items-center px-6">       
+    <div class="relative min-h-screen flex flex-col items-center justify-center px-6 space-y-6">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://paragonprints.github.io/prayertimes/bg.jpg');">
+    </div>
+    
+        <!-- Title Container -->
         <div class="relative max-w-3xl text-center bg-black/50 text-white p-8 rounded-lg shadow-lg">
             <h1 class="text-5xl font-extrabold mb-6">Christ is King</h1>
             <p class="text-lg sm:text-xl leading-relaxed">
@@ -16,22 +19,14 @@
                 Subscribe to the calendars below (iOS/Android) to get a reminder at each prayer time to Proclaim Christ is King.
             </p>
         </div>
-    </div>
     
-<body class="bg-gray-100 text-gray-900 flex flex-col items-center p-6">
-    <div class="max-w-2xl w-full bg-white p-6 rounded-lg shadow-lg">
-        <h1 class="text-3xl font-bold text-center">Proclaim Christ is King</h1>
-        <p class="text-center mt-2">Automatically notifies at Muslim prayer times to proclaim Christ.</p>
-        
-        <div class="mt-6 text-center">
-            <h2 class="text-xl font-semibold">Today's Prayer Times</h2>
-            <ul id="prayer-times" class="mt-2 space-y-1 text-lg font-mono"></ul>
-        </div>
-
-        <div class="mt-6 text-center">
-            <h2 class="text-xl font-semibold">Next Notification In:</h2>
-            <p id="countdown" class="text-2xl font-bold text-red-600 mt-2"></p>
-        </div>
+        <!-- Prayer Schedule Container -->
+        <div class="relative max-w-3xl text-center bg-black/50 text-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold mb-4">Prayer Times for Today</h2>
+            <div id="prayer-times" class="text-lg">Loading...</div>
+    
+            <h2 class="text-2xl font-semibold mt-6">Next Prayer In:</h2>
+            <div class="countdown text-2xl font-bold mt-2" id="countdown">Loading...</div>
         <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="https://paragonprints.github.io/prayertimes/prayer_times.ics"
                class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-lg font-semibold rounded-full shadow-lg hover:scale-105 hover:from-blue-600 hover:to-blue-800 transition-transform duration-200 ease-in-out">
