@@ -6,9 +6,10 @@
     <title>Proclaim Christ is King</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<body class="bg-cover bg-center bg-no-repeat text-black" style="background-image: url('https://paragonprints.github.io/prayertimes/bg.jpg');">   
 <h1>Christ is King</h1>
     <p>In one country in North Africa, 5 times every day, 50,000 mosques deny the deity of Christ—250,000 times daily! The only response is to Pray and Proclaim. Subscribe to the calendars below (iOS/Android) to get a reminder at each prayer time to Proclaim Christ is King.</p>
-    
+
 <body class="bg-gray-100 text-gray-900 flex flex-col items-center p-6">
     <div class="max-w-2xl w-full bg-white p-6 rounded-lg shadow-lg">
         <h1 class="text-3xl font-bold text-center">Proclaim Christ is King</h1>
@@ -23,10 +24,11 @@
             <h2 class="text-xl font-semibold">Next Notification In:</h2>
             <p id="countdown" class="text-2xl font-bold text-red-600 mt-2"></p>
         </div>
-        
-        <div class="mt-6 text-center">
-            <a href="#" id="google-calendar" class="text-blue-600 underline">Subscribe to Google Calendar</a>
-        </div>
+        <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="https://paragonprints.github.io/prayertimes/prayer_times.ics"
+               class="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-700 text-white text-lg font-semibold rounded-full shadow-lg hover:scale-105 hover:from-blue-600 hover:to-blue-800 transition-transform duration-200 ease-in-out">
+                📅 iOS Calendar
+            </a>
     </div>
 
     <script>
@@ -75,7 +77,7 @@
                 } else {
                     document.getElementById('countdown').textContent = "No more prayers today.";
                 }
-            }
+            }   
 
             updateCountdown();
             setInterval(updateCountdown, 1000);
