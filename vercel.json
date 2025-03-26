@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "api/updateCalendar.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/updateCalendar", "dest": "api/updateCalendar.js" }
+  ]
+}
